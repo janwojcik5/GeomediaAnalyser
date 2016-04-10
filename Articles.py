@@ -17,7 +17,7 @@ class Articles():
             article.time = parts[2]
             article.title = parts[3]
             article.text = parts[4]
-            article.add_tag(parts[5])
+            article.add_tag(parts[5].replace("\"", ""))
             returnList.append(article)
         return returnList
 

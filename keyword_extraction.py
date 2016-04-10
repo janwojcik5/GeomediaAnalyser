@@ -26,15 +26,27 @@ if __name__ == "__main__":
     rake_tags = RakeTags(articles)
 
     found_tags = rake_tags.find_tags(tags_origin)
-    print("")
+    # for article in articles.articles:
+    articles_count = len(articles.articles)
+    original_articles_with_tags = len(filter(lambda x: len(x.tags) > 0, articles.articles))
+    recreated_articles_with_tags = len(filter(lambda x: len(x[1]) > 0, found_tags))
+
+    matching_tags_count = 0.0
+    for article in articles.articles:
+        original_tags = article.tags
+        for found_tag in found_tags.get(article.id):
+            if found_tag in original_tags:
+                matching_tags_count += 1
+                break
+    print(matching_tags_count / articles_count)
 
     # if len(sys.argv) < 2:
     # for article in dao.get_articles('en_AUS_austra_int'):
-    #         keywords = rake_object.run(article.text)
-    #         print '\n' + article.text
-    #         print keywords
+    # keywords = rake_object.run(article.text)
+    # print '\n' + article.text
+    # print keywords
     # elif len(sys.argv) == 2:
-    #     for article in dao.get_articles(sys.argv[1]):
+    # for article in dao.get_articles(sys.argv[1]):
     #         keywords = rake_object.run(article.text)
     #         print '\n' + article.text
     #         print keywords

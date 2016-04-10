@@ -13,7 +13,7 @@ class TagsOrigin:
             parts = line.split('\t')
             tag = TagWord()
             tag.id = parts[0]
-            tag.tag = parts[1]
+            tag.tag = parts[1].replace("\"", "")
             tag.word = parts[2].lower()
             tags.append(tag)
         return tags
@@ -21,8 +21,6 @@ class TagsOrigin:
     def get_tags_by_words(self):
         result = defaultdict(list)
         for tag in self.tags:
-            if tag.word in result.keys():
-                print("duplicate")
             result[tag.word].append(tag)
         return result
 
