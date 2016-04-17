@@ -13,10 +13,11 @@ class Statistics:
             stats[item] += 1
         return stats
 
-    def print_stats(self):
+    def print_stats(self,printThreshold=0):
         sorted_by_occurrences = sorted(self.stats.items(), key=operator.itemgetter(1))
         sorted_by_occurrences.reverse()
         sorted_by_occurrences = filter(lambda tuple: tuple[0] != '', sorted_by_occurrences)
+        sorted_by_occurrences = filter(lambda tuple: tuple[1] > printThreshold,sorted_by_occurrences)
 
         for tuple in sorted_by_occurrences:
             print(tuple)

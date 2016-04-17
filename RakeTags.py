@@ -1,5 +1,5 @@
 import rake.rake as rake
-
+from Statistics import Statistics
 
 class RakeTags:
     def __init__(self, articles):
@@ -38,3 +38,11 @@ class RakeTags:
 		      found_tags.add(x.tag)
 	    per_article_tag_found[article_id]=found_tags
 	return per_article_tag_found
+
+    def print_keyword_stats(self,printThreshold=0):
+	keywords_list=[]
+	for article_keywords in self.rake_keywords.values():
+	    #print article_keywords
+	    keywords_list+=filter(lambda keyword: keyword!='',map(lambda tuple:tuple[0],article_keywords))
+	    #print keywords_list
+	Statistics(keywords_list).print_stats(printThreshold)

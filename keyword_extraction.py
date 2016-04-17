@@ -57,7 +57,8 @@ if __name__ == "__main__":
     tags_origin = TagsOrigin("./geomedia/cist-sample_geomedia-db/Sample_GeomediaDB/Dico_Country_Free.csv")
     articles = Articles('en_AUS_austra_int')
     rake_tags = RakeTags(articles)
-
+    
+    rake_tags.print_keyword_stats(3)
     #found_tags = rake_tags.find_tags(tags_origin,"en")
     found_tags = rake_tags.find_tags_for_sentences(tags_origin, "en")
     # for article in articles.articles:
