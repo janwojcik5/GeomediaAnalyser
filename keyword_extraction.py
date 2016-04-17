@@ -58,7 +58,8 @@ if __name__ == "__main__":
     articles = Articles('en_AUS_austra_int')
     rake_tags = RakeTags(articles)
 
-    found_tags = rake_tags.find_tags(tags_origin, "en")
+    #found_tags = rake_tags.find_tags(tags_origin,"en")
+    found_tags = rake_tags.find_tags_for_sentences(tags_origin, "en")
     # for article in articles.articles:
     articles_count = len(articles.articles)
     original_articles_with_tags = len(filter(lambda x: len(x.tags) > 0, articles.articles))
