@@ -5,7 +5,6 @@ class RakeTags:
     def __init__(self, articles):
         self.rake_object = rake.Rake("./rake/SmartStoplist.txt", 3, 3, 1)
         self.rake_keywords = self.get_rake_keywords(articles)
-        print self.rake_keywords
 
     def get_rake_keywords(self, articles):
         rake_tags = {}
