@@ -1,8 +1,10 @@
 from Articles import Articles
+from Statistics import Statistics
 from  TagsOrigin import TagsOrigin
 from RakeTags import RakeTags
 import rake.rake as rake
 from article import Article
+from itertools import chain
 
 
 class CSVArticleDao():
@@ -34,7 +36,7 @@ def print_true_false_table(articles_by_id, found_tags, number_of_tags):
             original_tag_set.remove('')
         if '' in found_tag_set:
             found_tag_set.remove('')
-        #print original_tag_set,found_tag_set
+        # print original_tag_set,found_tag_set
 
         article_true_positive = 0
         for tag in original_tag_set:
@@ -78,3 +80,8 @@ if __name__ == "__main__":
     if '' in tag_set:
         tag_set.remove('')
     print_true_false_table(articles.create_articles_map(articles.articles), found_tags, len(tag_set))
+
+
+    # print statistics:
+    all_tags = list(chain.from_iterable(map(lambda article: article.tags, articles.articles)))
+    Statistics(all_tags).print_stats()
