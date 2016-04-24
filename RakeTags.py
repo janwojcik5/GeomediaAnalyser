@@ -26,8 +26,7 @@ class RakeTags:
         articles_parsed = 0
         rake_tags = {}
         for article in articles.articles:
-            # print '{0}\r'.format(str(float(articles_parsed) / articles_total))
-            sys.stdout.write("\rCurrent status: " + str(float(articles_parsed) / articles_total) + "%")
+            sys.stdout.write("\rCurrent status: " + str(float(articles_parsed) * 100 / articles_total) + "%")
             rake_tags[article.id] = self.rake_keywords_combinations(self.rake_object.run(article.text))
             articles_parsed += 1
         return rake_tags

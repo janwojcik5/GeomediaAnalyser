@@ -40,8 +40,8 @@ def print_true_false_table(articles_by_id, found_tags, number_of_tags):
 
 if __name__ == "__main__":
     tags_origin = TagsOrigin("./geomedia/Geomedia_extract_AGENDA/Geomedia_extract_AGENDA/Dico_Country_Free.csv")
-    # articles = Articles('./geomedia/Geomedia_extract_AGENDA/Geomedia_extract_AGENDA')
-    articles = ArticlesFactory.from_single_newspaper('en_AUS_austra_int')
+    articles = ArticlesFactory.all_articles('./geomedia/Geomedia_extract_AGENDA/Geomedia_extract_AGENDA')
+    # articles = ArticlesFactory.from_single_newspaper('./geomedia/Geomedia_extract_AGENDA/Geomedia_extract_AGENDA/en_AUS_austra_int')
     rake_tags = RakeTags(articles)
 
     rake_tags.print_keyword_stats(3)
@@ -68,7 +68,6 @@ if __name__ == "__main__":
     if '' in tag_set:
         tag_set.remove('')
     print_true_false_table(articles.create_articles_map(articles.articles), found_tags, len(tag_set))
-
 
     # print statistics:
     all_tags = list(chain.from_iterable(map(lambda article: article.tags, articles.articles)))
