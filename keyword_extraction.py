@@ -6,22 +6,6 @@ import rake.rake as rake
 from article import Article
 from itertools import chain
 
-
-class CSVArticleDao():
-    def get_article(self, feed, articleID):
-        feed_file = open("./geomedia/cist-sample_geomedia-db/Sample_GeomediaDB/" + feed + "/rss_unique_tagged.csv", "r")
-        for line in feed_file.readlines():
-            parts = line.split('\t')
-            if parts[1] == articleID:
-                article = Article()
-                article.id = parts[0]
-                article.feed = parts[1]
-                article.time = parts[2]
-                article.title = parts[3]
-                article.text = parts[4]
-                return article
-
-
 def print_true_false_table(articles_by_id, found_tags, number_of_tags):
     false_negative = 0
     false_positive = 0
@@ -57,9 +41,9 @@ if __name__ == "__main__":
     tags_origin = TagsOrigin("./geomedia/cist-sample_geomedia-db/Sample_GeomediaDB/Dico_Country_Free.csv")
     articles = Articles('en_AUS_austra_int')
     rake_tags = RakeTags(articles)
-    
+
     rake_tags.print_keyword_stats(3)
-    #found_tags = rake_tags.find_tags(tags_origin,"en")
+    # found_tags = rake_tags.find_tags(tags_origin,"en")
     found_tags = rake_tags.find_tags_for_sentences(tags_origin, "en")
     # for article in articles.articles:
     articles_count = len(articles.articles)
