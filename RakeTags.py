@@ -1,4 +1,5 @@
 from itertools import chain
+import sys
 import rake.rake as rake
 from Statistics import Statistics
 
@@ -20,9 +21,15 @@ class RakeTags:
         return list(all_tags) + original_rake_tags
 
     def get_rake_keywords(self, articles):
+        print("Getting rake tags")
+        articles_total = float(len(articles.articles))
+        articles_parsed = 0
         rake_tags = {}
         for article in articles.articles:
+            # print '{0}\r'.format(str(float(articles_parsed) / articles_total))
+            sys.stdout.write("\rCurrent status: " + str(float(articles_parsed) / articles_total) + "%")
             rake_tags[article.id] = self.rake_keywords_combinations(self.rake_object.run(article.text))
+            articles_parsed += 1
         return rake_tags
 
     def find_tags(self, tags_origin, language=None):

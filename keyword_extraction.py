@@ -1,4 +1,5 @@
 from Articles import Articles
+from ArticlesFactory import ArticlesFactory
 from Statistics import Statistics
 from  TagsOrigin import TagsOrigin
 from RakeTags import RakeTags
@@ -38,8 +39,9 @@ def print_true_false_table(articles_by_id, found_tags, number_of_tags):
 
 
 if __name__ == "__main__":
-    tags_origin = TagsOrigin("./geomedia/cist-sample_geomedia-db/Sample_GeomediaDB/Dico_Country_Free.csv")
-    articles = Articles('en_AUS_austra_int')
+    tags_origin = TagsOrigin("./geomedia/Geomedia_extract_AGENDA/Geomedia_extract_AGENDA/Dico_Country_Free.csv")
+    # articles = Articles('./geomedia/Geomedia_extract_AGENDA/Geomedia_extract_AGENDA')
+    articles = ArticlesFactory.from_single_newspaper('en_AUS_austra_int')
     rake_tags = RakeTags(articles)
 
     rake_tags.print_keyword_stats(3)
