@@ -1,3 +1,4 @@
+from itertools import chain
 import rake.rake as rake
 from Statistics import Statistics
 
@@ -7,10 +8,21 @@ class RakeTags:
         self.rake_object = rake.Rake("./rake/SmartStoplist.txt", 3, 3, 1)
         self.rake_keywords = self.get_rake_keywords(articles)
 
+    def single_words_rake_tags(self, rake_tag):
+        return rake_tag
+
+    def rake_keywords_combinations(self, original_rake_tags):
+        all_tags = set()
+        for tag in original_rake_tags:
+            splitted_tag = tag[0].split(" ")
+            for splitted_tag_with_rating in list(map(lambda x: (x, tag[1]), splitted_tag)):
+                all_tags.add(splitted_tag_with_rating)
+        return list(all_tags) + original_rake_tags
+
     def get_rake_keywords(self, articles):
         rake_tags = {}
         for article in articles.articles:
-            rake_tags[article.id] = self.rake_object.run(article.text)
+            rake_tags[article.id] = self.rake_keywords_combinations(self.rake_object.run(article.text))
         return rake_tags
 
     def find_tags(self, tags_origin, language=None):
@@ -45,5 +57,5 @@ class RakeTags:
         for article_keywords in self.rake_keywords.values():
             # print article_keywords
             keywords_list += filter(lambda keyword: keyword != '', map(lambda tuple: tuple[0], article_keywords))
-            #print keywords_list
+            # print keywords_list
         Statistics(keywords_list).print_stats(printThreshold)
