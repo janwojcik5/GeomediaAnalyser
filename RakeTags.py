@@ -59,6 +59,7 @@ class RakeTags:
         return per_article_tag_found
 
     def print_keyword_stats(self, printThreshold=0):
+        print("printing rake keywords stats")
         keywords_list = []
         for article_keywords in self.rake_keywords.values():
             # print article_keywords
