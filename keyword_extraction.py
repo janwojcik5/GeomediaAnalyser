@@ -3,6 +3,7 @@ from ArticlesFactory import ArticlesFactory
 from Statistics import Statistics
 from  TagsOrigin import TagsOrigin
 from RakeTags import RakeTags
+from LatentAnalysis import LatentAnalysis
 import rake.rake as rake
 from article import Article
 from itertools import chain
@@ -75,5 +76,11 @@ if __name__ == "__main__":
 
     flatmapped_rake_tags = list(chain.from_iterable(rake_tags_per_article.values()))
     Statistics(flatmapped_rake_tags).print_stats(100)
+    #Statistics(flatmapped_rake_tags).show_chart()
 
     print_true_false_table(articles.create_articles_map(articles.articles), rake_tags_per_article, len(tag_set))
+    lanalysis=LatentAnalysis(articles)
+    lanalysis.generate_corpus()
+    #lanalysis.save_corpus()
+    #lanalysis.save_dictionary()
+    lanalysis.perform_LSA_analysis()
