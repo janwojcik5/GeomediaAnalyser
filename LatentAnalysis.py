@@ -22,7 +22,7 @@ class LatentAnalysis():
     for article in self.articles.articles:
       list_for_article=[]
       #Take the text and topic and split it into words. At the moment words include only English letters
-      normal_words=re.findall("[a-zA-z\-']+",article.title+' '+article.text)
+      normal_words=map(lambda x: x.lower(),re.findall("[a-zA-z\-']+",article.title+' '+article.text))
       for word in normal_words:
 	if word not in self.stopwords:
 	  list_for_article.append(word)
