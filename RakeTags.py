@@ -65,4 +65,4 @@ class RakeTags:
             # print article_keywords
             keywords_list += filter(lambda keyword: keyword != '', map(lambda tuple: tuple[0], article_keywords))
             # print keywords_list
-        Statistics(keywords_list).print_stats(printThreshold)
+        Statistics(keywords_list, "Rake keywords stats").print_stats(printThreshold)

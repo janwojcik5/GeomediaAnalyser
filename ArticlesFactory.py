@@ -21,7 +21,7 @@ class ArticlesFactory():
         print("Parsing " + parsed_articles_file)
         feed_file = open(parsed_articles_file, "r")
         lines = feed_file.readlines()
-        for line in lines:
+        for line in lines[1:]:
             parts = line.split('\t')
             article = Article()
             article.id = parts[0]

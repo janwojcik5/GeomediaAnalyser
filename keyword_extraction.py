@@ -1,12 +1,10 @@
-from Articles import Articles
+from itertools import chain
+
 from ArticlesFactory import ArticlesFactory
 from Statistics import Statistics
 from  TagsOrigin import TagsOrigin
 from RakeTags import RakeTags
-from LatentAnalysis import LatentAnalysis
-import rake.rake as rake
-from article import Article
-from itertools import chain
+
 
 def print_true_false_table(articles_by_id, found_tags, number_of_tags):
     false_negative = 0
@@ -72,15 +70,15 @@ if __name__ == "__main__":
 
     # print statistics:
     all_original_tags = list(chain.from_iterable(map(lambda article: article.tags, articles.articles)))
-    Statistics(all_original_tags).print_stats(100)
+    Statistics(all_original_tags, "Original tags").print_stats(100)
 
     flatmapped_rake_tags = list(chain.from_iterable(rake_tags_per_article.values()))
-    Statistics(flatmapped_rake_tags).print_stats(100)
-    #Statistics(flatmapped_rake_tags).show_chart()
+    Statistics(flatmapped_rake_tags, "Rake tags").print_stats(100)
+    # Statistics(flatmapped_rake_tags).show_chart()
 
     print_true_false_table(articles.create_articles_map(articles.articles), rake_tags_per_article, len(tag_set))
-    lanalysis=LatentAnalysis(articles)
-    lanalysis.generate_corpus()
+    # lanalysis=LatentAnalysis(articles)
+    # lanalysis.generate_corpus()
     #lanalysis.save_corpus()
     #lanalysis.save_dictionary()
-    lanalysis.perform_LSA_analysis()
+    # lanalysis.perform_LSA_analysis()
