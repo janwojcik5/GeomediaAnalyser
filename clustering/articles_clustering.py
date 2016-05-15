@@ -36,15 +36,21 @@ if __name__ == "__main__":
     clusters = k_means.labels_.tolist()
 
 
-    # write out clusters
-    print("Top terms per cluster:")
+    # get clusters keywords
     order_centroids = k_means.cluster_centers_.argsort()[:, ::-1]
     terms = vectorizer.get_feature_names()
+
+    clusters_keywords = {}
+    print("Top terms per cluster:")
     for i in range(n_clusters):
         print "Cluster %d:" % i,
+        c_words = []
         for ind in order_centroids[i, :10]:
+            c_words.append(terms[ind])
             print ' %s' % terms[ind],
+        clusters_keywords[i] = c_words
         print
+
 
     # join clusters with articles
     feed_with_cluster = zip(k_means_labels, map(lambda article: article.feed, articles.articles))
@@ -111,8 +117,8 @@ if __name__ == "__main__":
     # ax.set_aspect('auto')
     # ax.tick_params( \
     # axis='x',  # changes apply to the x-axis
-    #         which='both',  # both major and minor ticks are affected
-    #         bottom='off',  # ticks along the bottom edge are off
+    # which='both',  # both major and minor ticks are affected
+    # bottom='off',  # ticks along the bottom edge are off
     #         top='off',  # ticks along the top edge are off
     #         labelbottom='off')
     #     ax.tick_params( \
