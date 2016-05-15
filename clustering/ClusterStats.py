@@ -1,4 +1,5 @@
 from collections import defaultdict, Counter
+import operator
 
 __author__ = 'grzegorz.miejski'
 
@@ -18,4 +19,9 @@ class ClusterStats:
 
         for feed_name, items_count in counter.items():
             result[feed_name] = float(items_count) / float(self.total_count) * 100
-        return result
+        return sorted(result.items(), key=operator.itemgetter(1), reverse=True)
+
+    def _print(self):
+        limit = min(len(self.stats), 6)
+        for kv in self.stats[:limit - 1]:
+            print(kv)
