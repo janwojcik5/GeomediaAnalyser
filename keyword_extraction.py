@@ -4,7 +4,7 @@ from ArticlesFactory import ArticlesFactory
 from Statistics import Statistics
 from  TagsOrigin import TagsOrigin
 from RakeTags import RakeTags
-
+from LatentAnalysis import LatentAnalysis
 
 def print_true_false_table(articles_by_id, found_tags, number_of_tags):
     false_negative = 0
@@ -77,8 +77,9 @@ if __name__ == "__main__":
     # Statistics(flatmapped_rake_tags).show_chart()
 
     print_true_false_table(articles.create_articles_map(articles.articles), rake_tags_per_article, len(tag_set))
-    # lanalysis=LatentAnalysis(articles)
-    # lanalysis.generate_corpus()
+    #lanalysis=LatentAnalysis(articles)
+    #lanalysis.generate_corpus()
     #lanalysis.save_corpus()
     #lanalysis.save_dictionary()
-    # lanalysis.perform_LSA_analysis()
+    #lanalysis.perform_LSA_analysis()
+    #lanalysis.LSA_test_article(articles.articles[0])

@@ -53,4 +53,22 @@ class LatentAnalysis():
         lda = gensim.models.ldamodel.LdaModel(corpus=self.corpus, id2word=self.dictionary, num_topics=100,
                                               update_every=1, chunksize=10000, passes=1)
         print lda.print_topics(20)
+        
+    def LSA_test_article(self,article):
+	normal_words=map(lambda x: x.lower(),re.findall("[a-zA-Z\-']+",article.title+' '+article.text))
+	list_for_article=[]
+	for word in normal_words:
+	  if word not in self.stopwords:
+	    list_for_article.append(word)
+	doc_bow=self.dictionary.doc2bow(list_for_article)
+	return self.lsi[doc_bow]
+  
+    def LDA_test_article(self,article):
+	normal_words=map(lambda x: x.lower(),re.findall("[a-zA-Z\-']+",article.title+' '+article.text))
+	list_for_article=[]
+	for word in normal_words:
+	  if word not in self.stopwords:
+	    list_for_article.append(word)
+	doc_bow=self.dictionary.doc2bow(list_for_article)
+	return self.lda[doc_bow]
     
