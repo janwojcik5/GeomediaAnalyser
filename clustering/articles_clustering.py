@@ -51,7 +51,6 @@ if __name__ == "__main__":
         clusters_keywords[i] = c_words
         print
 
-
     # join clusters with articles
     feed_with_cluster = zip(k_means_labels, map(lambda article: article.feed, articles.articles))
     cluster_stats = {}
@@ -64,8 +63,7 @@ if __name__ == "__main__":
 
     cluster_stats = map_values(grouped_feeds, group_by_feed_fun)
 
-    Clusters()
-    pass
+    Clusters(clusters_keywords, cluster_stats)
 
     # import matplotlib.pyplot as plt
     #
