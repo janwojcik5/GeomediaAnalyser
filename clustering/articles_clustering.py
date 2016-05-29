@@ -110,11 +110,13 @@ def print_histograms(n_clusters=10,plot_kind='line'):
     plt.show()
     
 if __name__ == "__main__":
-    n_clusters = 10
-    #articles = ArticlesFactory.all_articles('../geomedia/Geomedia_extract_AGENDA/Geomedia_extract_AGENDA')
-    articles = ArticlesFactory.from_single_newspaper('../geomedia/Geomedia_extract_AGENDA/Geomedia_extract_AGENDA/en_AUS_austra_int')
+    n_clusters = 30
+    articles = ArticlesFactory.all_articles('../geomedia/Geomedia_extract_AGENDA/Geomedia_extract_AGENDA')
+    # articles = ArticlesFactory.from_single_newspaper('../geomedia/Geomedia_extract_AGENDA/Geomedia_extract_AGENDA/en_AUS_austra_int')
+    # articles.articles = articles.articles[:4000]
 
     clusters = calculate_clusters(articles, n_clusters)
     clusters._print()
-    print_histograms(n_clusters)
+    clusters.save_to_file("./results/clusters.csv")
+    clusters.save_to_file_ids_only("./results/clusters_to_cluster_id.csv")
     print
